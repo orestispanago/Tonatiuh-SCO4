@@ -1,0 +1,18 @@
+tonatiuh_filename( "/home/orestis/Downloads/Centered-coords/Corrected-dimensions/Longitudinal/long.tnh");
+
+tonatiuh_numrays(50000);
+
+
+tonatiuh.SetExportPreviousNextPhotonID( true );
+tonatiuh.SetExportAllPhotonMap( true );
+tonatiuh.SetExportPhotonMapType( "SQL_Database" );
+tonatiuh.SetExportTypeParameterValue( "ExportDirectory",  "/home/orestis/Downloads/Centered-coords/Corrected-dimensions/Longitudinal/raw" );
+
+for( var i = 155; i <= 205; i=i+5 ){
+	tonatiuh.ChangeSunPosition( i, 0 );
+	var s = i.toString();
+	tonatiuh.SetExportTypeParameterValue( "DBFilename",  s );
+	tonatiuh.Run();
+
+
+}
