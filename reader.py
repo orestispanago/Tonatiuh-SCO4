@@ -58,7 +58,7 @@ def read_dir(folder):
     df.sort_index(inplace=True)
     return df
 
-folders = ["ideal-plain/Transversal/raw", "ideal-plain/Longitudinal/raw"]
+folders = ["errors-plain/Transversal/raw", "errors-plain/Longitudinal/raw"]
 
 for folder in folders:
     raw_df = read_dir(folder)
