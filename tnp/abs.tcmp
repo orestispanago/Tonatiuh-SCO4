@@ -1,0 +1,44 @@
+#Inventor V2.1 ascii
+
+
+DEF abs TSeparatorKit {
+  fields [ SFEnum renderCaching, SFEnum boundingBoxCaching, SFEnum renderCulling, SFEnum pickCulling, SFNode callbackList, SFNode pickStyle, SFNode appearance, SFNode units, SFNode transform, SFNode texture2Transform, SFNode childList, SFNode tracker, SFNode topSeparator ]
+  transform 
+  Transform {
+    translation 0 0 1.5
+    rotation 0.99999994 0 0  1.5700002
+
+  }
+  childList 
+  NodeKitListPart {
+    containerTypeName "Separator"
+    childTypeNames [ "ShapeKit",
+        "SeparatorKit" ]
+    containerNode 
+    Separator {
+
+      DEF TShapeKit1 TShapeKit {
+        fields [ SFEnum renderCaching, SFEnum boundingBoxCaching, SFEnum renderCulling, SFEnum pickCulling, SFNode callbackList, SFNode pickStyle, SFNode appearance, SFNode units, SFNode transform, SFNode texture2Transform, SFNode childList, SFNode materialBinding, SFNode normalBinding, SFNode textureCoordinateBinding, SFNode shapeHints, SFNode coordinate3, SFNode coordinate4, SFNode normal, SFNode textureCoordinate2, SFNode textureCoordinateFunction, SFNode profileCoordinate2, SFNode profileCoordinate3, SFNode profileList, SFNode localTransform, SFNode shape, SFNode topSeparator, SFNode shapeSeparator ]
+        appearance 
+        AppearanceKit {
+          material 
+          DEF Basic_Refractive_Material MaterialBasicRefractive {
+            fields [ SFDouble reflectivityFront, SFDouble reflectivityBack, SFDouble transmissivityFront, SFDouble transmissivityBack, SFDouble nFront, SFDouble nBack, SFDouble sigmaSlope, SFEnum distribution, MFColor m_ambientColor, MFColor m_diffuseColor, MFColor m_specularColor, MFColor m_emissiveColor, MFFloat m_shininess, MFFloat m_transparency ]
+
+          }
+
+        }
+        shape 
+        DEF Flat_Rectangle ShapeFlatRectangle {
+          fields [ SFDouble width, SFDouble height, SFEnum activeSide ]
+          width 0.25
+          height 0.25
+
+        }
+
+      }
+    }
+
+  }
+
+}

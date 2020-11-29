@@ -39,7 +39,7 @@ def contains_flux_or_losses(main_str_list, substr_list=["flux", "losses"]):
 
 def plot_quantities(df, quantities_list):
     """ Plots list of df columns in same plot """
-    pic_path = os.path.join(os.getcwd(), "pics", "-".join(quantities_list))
+    pic_path = os.path.join(FOLDER, "pics", "-".join(quantities_list))
     mkdir_if_not_exists(os.path.dirname(pic_path))
     fig, ax = plt.subplots(figsize=(9, 6))
     for col in quantities_list:
@@ -65,18 +65,16 @@ def calc(fname):
                                            - df["gap_losses"]
     return df
 
-df = calc("fluxes.csv")
+FOLDER = "ideal-plain/Transversal"
+df = calc(f"{FOLDER}/fluxes.csv")
 
 df["intercept_factor"] = df["absorbed_flux"] / df["reflected_flux"]
 df["intercept_factor_comsol"] = df["absorbed_flux"] / df["incident_flux"]
 
-plot_quantities(df, ["reflected_flux", "absorbed_flux", "incident_flux"])
+plot_quantities(df, ["reflected_flux", "absorbed_flux", "incident_flux", "sun"])
 plot_quantities(df, ["absorbed_flux"])
 plot_quantities(df, ["missing_losses"])
 plot_quantities(df, ["gap_losses"])
 
 plot_quantities(df, ["intercept_factor"] )
 plot_quantities(df, ["intercept_factor_comsol"])
-
-# Energy balance
-

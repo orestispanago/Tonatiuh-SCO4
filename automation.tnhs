@@ -1,0 +1,38 @@
+var cwd = "/home/orestis/Projects/Tonatiuh-SCO4/";
+var filename = "ideal-plain";
+
+tonatiuh.Open( cwd + filename + ".tnh");
+tonatiuh.SetRaysPerIteration(1000000);
+
+tonatiuh.SetExportAllPhotonMap( true );
+tonatiuh.SetExportCoordinates(false, false);
+tonatiuh.SetExportIntersectionSurface(true);
+tonatiuh.SetExportIntersectionSurfaceSide(true);
+tonatiuh.SetExportPreviousNextPhotonID( false );
+tonatiuh.SetExportPhotonMapType( "SQL_Database" );
+tonatiuh.SetRaysDrawingOptions(false, false);
+
+function transversal() {
+var exp_dir = cwd + filename + "/Transversal/raw";
+tonatiuh.SetExportTypeParameterValue( "ExportDirectory",  exp_dir );
+for( var i = 180; i <= 225; i=i+1 ){
+	tonatiuh.ChangeSunPosition( i, 0 );
+	var s = i.toString();
+	tonatiuh.SetExportTypeParameterValue( "DBFilename",  s );
+	tonatiuh.Run();
+}
+}
+
+function longitudinal() {
+var exp_dir = cwd + filename + "/Longitudinal/raw";
+tonatiuh.SetExportTypeParameterValue( "ExportDirectory",  exp_dir );
+tonatiuh.SetValue("//SunNode/RootNode", "rotation", "0 0 1 1.57");
+for( var i = 180; i <= 205; i=i+0.5 ){
+	tonatiuh.ChangeSunPosition( i, 0 );
+	var s = i.toString();
+	tonatiuh.SetExportTypeParameterValue( "DBFilename",  s );
+	tonatiuh.Run();
+}
+}
+transversal();
+//longitudinal();

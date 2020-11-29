@@ -2,7 +2,7 @@ import os
 import glob
 import sqlite3
 import pandas as pd
-
+from pathlib import Path
 
 def get_surface_hits(dbname,surface, side):
     """ Gets count of photon hits on surface from .db file"""
@@ -43,7 +43,7 @@ def get_fluxes(fname):
     hits = get_hits(fname)
     wphoton = get_wphoton(fname)
     convert_to_w(hits, wphoton)
-    hits.update({"angle" : int(os.path.split(fname)[1][:-3])})
+    hits.update({"angle" : round(float(os.path.split(fname)[1][:-3]),1)})
     return hits
 
 def read_dir(folder):
@@ -54,7 +54,12 @@ def read_dir(folder):
     for fname in dbfiles: 
         df.loc[count] = [*get_fluxes(fname).values()]
         count+=1
-    return df.set_index("angle")
+    df = df.set_index("angle")
+    df.sort_index(inplace=True)
+    return df
 
-raw_df = read_dir("raw")
-raw_df.to_csv("fluxes.csv")
+folders = ["ideal-plain/Transversal/raw", "ideal-plain/Longitudinal/raw"]
+
+for folder in folders:
+    raw_df = read_dir(folder)
+    raw_df.to_csv(f"{Path(folder).parents[0]}/fluxes.csv")
